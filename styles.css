@@ -638,8 +638,24 @@ h3 {
   margin-bottom: 1rem;
 }
 
-.footer-nmls {
+.footer-phone {
+  margin-bottom: 1.1rem;
+}
+
+.footer-phone a {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: rgba(250, 247, 241, 0.85);
+  transition: color 0.3s var(--ease);
+}
+
+.footer-phone a:hover {
+  color: var(--gold-soft);
+}
+
+.footer-licensing li {
   font-size: 0.78rem;
+  line-height: 1.9;
   color: rgba(250, 247, 241, 0.55);
 }
 

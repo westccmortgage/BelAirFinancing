@@ -38,7 +38,11 @@ The form is named `financing-review` and uses Netlify's static form detection (`
 
 ## Before going live
 
-- Replace `NMLS: [ADD COMPANY NMLS]` in the footer of `index.html` with the actual company NMLS number.
+- Verify the licensing numbers in the footer of `index.html` against NMLS Consumer Access and CA DRE records before publishing:
+  - West Coast Capital Mortgage Inc. — NMLS #2817729
+  - CA DRE Corporation License #02440065
+  - Anatoliy Kanevsky — NMLS #2775380
+  - California Real Estate Broker DRE #01385024
 - Review all copy for state licensing and compliance requirements.
 
 ## Compliance note
