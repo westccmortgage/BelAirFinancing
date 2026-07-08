@@ -17,6 +17,7 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step.
 | `sitemap.xml` | XML sitemap for search engines |
 | `robots.txt` | Crawler rules and sitemap location |
 | `<area>/index.html` | Seven area pages (bel-air, beverly-hills, holmby-hills, brentwood, pacific-palisades, malibu, manhattan-beach) |
+| `strategies/<slug>/index.html` | Eight strategy pages (jumbo-purchase, interest-only, self-employed, asset-based, bank-statement, buy-before-you-sell, dscr-investor, refinance-cash-out) |
 | `guides/<slug>/index.html` | Educational guides (down-payment, fha-vs-conventional, pre-approval) |
 | `review/index.html` | "Share Your Experience" page (noindex) with QR code |
 | `REVIEWS.md` | Google review request templates and instructions |
