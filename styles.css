@@ -782,6 +782,45 @@ a.card {
   margin-bottom: 1.4rem;
 }
 
+/* ---------- Guide / article prose ---------- */
+
+.prose {
+  max-width: 44rem;
+}
+
+.prose h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 2.4rem 0 0.9rem;
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  color: var(--charcoal-soft);
+  margin-bottom: 1.15rem;
+}
+
+.prose ul {
+  margin: 0 0 1.3rem 1.15rem;
+}
+
+.prose li {
+  list-style: disc;
+  color: var(--charcoal-soft);
+  margin-bottom: 0.5rem;
+  padding-left: 0.35rem;
+}
+
+.prose .disclaimer {
+  font-size: 0.85rem;
+  color: var(--stone);
+  border-top: 1px solid var(--hairline);
+  padding-top: 1.25rem;
+  margin-top: 2.25rem;
+}
+
 /* ---------- CTA band (area pages) ---------- */
 
 .cta-band {

@@ -16,6 +16,10 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step.
 | `netlify.toml` | Netlify publish directory and security headers |
 | `sitemap.xml` | XML sitemap for search engines |
 | `robots.txt` | Crawler rules and sitemap location |
+| `<area>/index.html` | Seven area pages (bel-air, beverly-hills, holmby-hills, brentwood, pacific-palisades, malibu, manhattan-beach) |
+| `guides/<slug>/index.html` | Educational guides (down-payment, fha-vs-conventional, pre-approval) |
+| `review/index.html` | "Share Your Experience" page (noindex) with QR code |
+| `REVIEWS.md` | Google review request templates and instructions |
 
 ## Local preview
 
