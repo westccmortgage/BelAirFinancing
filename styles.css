@@ -8,8 +8,8 @@
   --ivory-deep: #f3eee4;
   --white: #fffdf9;
   --charcoal: #23211d;
-  --charcoal-soft: #4c4740;
-  --stone: #8a8378;
+  --charcoal-soft: #44403a;
+  --stone: #6f6a5f;
   --gold: #b0925a;
   --gold-soft: #cbb488;
   --gold-wash: rgba(176, 146, 90, 0.10);
@@ -110,16 +110,22 @@ h3 {
 .btn {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 1rem 2.2rem;
+  padding: 0.9rem 2rem;
   border-radius: var(--radius);
   border: 1px solid transparent;
   cursor: pointer;
   transition: background-color 0.35s var(--ease), color 0.35s var(--ease),
-    border-color 0.35s var(--ease), transform 0.35s var(--ease);
+    border-color 0.35s var(--ease), transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+
+.btn:focus-visible {
+  outline: 1.5px solid var(--gold);
+  outline-offset: 3px;
 }
 
 .btn-primary {
@@ -131,10 +137,16 @@ h3 {
   background-color: var(--gold);
   color: var(--white);
   transform: translateY(-1px);
+  box-shadow: 0 10px 24px -14px rgba(176, 146, 90, 0.55);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-ghost {
-  border-color: var(--hairline);
+  border-color: rgba(35, 33, 29, 0.22);
   color: var(--charcoal);
   background-color: transparent;
 }
@@ -144,15 +156,19 @@ h3 {
   color: var(--gold);
 }
 
+.btn-ghost:active {
+  background-color: var(--gold-wash);
+}
+
 /* ---------- Header ---------- */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(250, 247, 241, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(250, 247, 241, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
@@ -258,17 +274,27 @@ h3 {
 }
 
 .hero-inner {
-  padding-block: clamp(5.5rem, 14vh, 10rem) clamp(5rem, 12vh, 8.5rem);
+  padding-block: clamp(4.5rem, 12vh, 8.5rem) clamp(2.5rem, 6vh, 4.5rem);
   max-width: 54rem;
 }
 
 .hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.6rem;
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 2.25rem;
+  height: 1px;
+  background-color: var(--gold-soft);
 }
 
 .hero-title {
@@ -280,23 +306,34 @@ h3 {
 .hero-subtitle {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.25rem, 3vw, 1.7rem);
-  color: var(--charcoal-soft);
+  font-weight: 500;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  line-height: 1.4;
+  color: var(--charcoal);
   max-width: 34ch;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
 }
 
 .hero-copy {
-  color: var(--stone);
+  color: var(--charcoal-soft);
   font-size: 0.98rem;
   max-width: 40rem;
-  margin-bottom: 2.75rem;
+  margin-bottom: 2.5rem;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.hero-hills {
+  display: block;
+  width: 100%;
+  height: clamp(3rem, 8vw, 6.5rem);
+  color: var(--gold);
+  opacity: 0.2;
+  pointer-events: none;
 }
 
 .hero-rule {
@@ -744,6 +781,49 @@ h3 {
   .site-nav .nav-cta {
     border-bottom: none;
     padding-bottom: 0.85rem;
+  }
+
+  .header-inner {
+    padding-block: 0.8rem;
+  }
+
+  .brand-name {
+    font-size: 1.08rem;
+  }
+
+  .brand-sub {
+    font-size: 0.54rem;
+    letter-spacing: 0.18em;
+  }
+
+  .hero-inner {
+    padding-block: 2.5rem 1.75rem;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 1.15rem;
+  }
+
+  .hero-title {
+    margin-bottom: 1.1rem;
+  }
+
+  .hero-subtitle {
+    margin-bottom: 1rem;
+  }
+
+  .hero-copy {
+    font-size: 0.94rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.76rem;
+  }
+
+  .hero-actions {
+    gap: 0.75rem;
   }
 
   .hero-actions .btn {
