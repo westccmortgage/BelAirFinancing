@@ -14,6 +14,8 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step.
 | `styles.css` | All styling (warm ivory / deep charcoal / soft gold palette) |
 | `script.js` | Header state, mobile navigation, scroll reveal, form handling |
 | `netlify.toml` | Netlify publish directory and security headers |
+| `sitemap.xml` | XML sitemap for search engines |
+| `robots.txt` | Crawler rules and sitemap location |
 
 ## Local preview
 
@@ -35,6 +37,16 @@ Note: the lead form relies on Netlify Forms and only records submissions when th
 ## Lead form
 
 The form is named `financing-review` and uses Netlify's static form detection (`data-netlify="true"`, hidden `form-name` input, honeypot field). Submissions are confirmed inline via JavaScript, with a standard POST fallback.
+
+## Google Search setup
+
+1. Attach the custom domain `belairfinancing.com` in Netlify (Domain management) so the canonical URL, sitemap, and robots.txt all point at the real domain.
+2. Open [Google Search Console](https://search.google.com/search-console) and add `belairfinancing.com` as a **Domain** property. Verify via the DNS TXT record Google provides (add it wherever the domain's DNS is managed — Netlify DNS if you delegate the domain there).
+3. In Search Console, go to **Sitemaps** and submit `https://belairfinancing.com/sitemap.xml`.
+4. Use **URL Inspection** on `https://belairfinancing.com/` and click *Request Indexing* to speed up the first crawl.
+5. Expect indexing within days; ranking for local luxury-mortgage queries builds over time.
+
+The page already includes a canonical tag, Open Graph / Twitter metadata, and `FinancialService` structured data (JSON-LD) for richer search results.
 
 ## Before going live
 
