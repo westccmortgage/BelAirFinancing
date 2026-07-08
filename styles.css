@@ -1,0 +1,761 @@
+/* ==========================================================================
+   Bel Air Financing — by West Coast Capital Mortgage
+   Warm ivory, deep charcoal, soft gold. Quiet, institutional, refined.
+   ========================================================================== */
+
+:root {
+  --ivory: #faf7f1;
+  --ivory-deep: #f3eee4;
+  --white: #fffdf9;
+  --charcoal: #23211d;
+  --charcoal-soft: #4c4740;
+  --stone: #8a8378;
+  --gold: #b0925a;
+  --gold-soft: #cbb488;
+  --gold-wash: rgba(176, 146, 90, 0.10);
+  --hairline: rgba(35, 33, 29, 0.12);
+
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --container: 72rem;
+  --radius: 2px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Reset & base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--charcoal);
+  background-color: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ---------- Typography ---------- */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  max-width: 24ch;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+.section-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.1rem;
+}
+
+.section-lede {
+  color: var(--charcoal-soft);
+  max-width: 44rem;
+  margin-top: 1.1rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease), color 0.35s var(--ease),
+    border-color 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.btn-primary {
+  background-color: var(--charcoal);
+  color: var(--ivory);
+}
+
+.btn-primary:hover {
+  background-color: var(--gold);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  border-color: var(--hairline);
+  color: var(--charcoal);
+  background-color: transparent;
+}
+
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(250, 247, 241, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: var(--hairline);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1.1rem;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.brand-sub {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.site-nav a {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--charcoal-soft);
+  transition: color 0.3s var(--ease);
+}
+
+.site-nav a:hover {
+  color: var(--gold);
+}
+
+.site-nav .nav-cta {
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold-soft);
+  padding-bottom: 0.15rem;
+}
+
+.site-nav .nav-cta:hover {
+  color: var(--charcoal);
+  border-bottom-color: var(--charcoal);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  margin-inline: auto;
+  background-color: var(--charcoal);
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+
+.nav-toggle.is-open span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 85% 0%, var(--gold-wash) 0%, transparent 55%),
+    linear-gradient(180deg, var(--white) 0%, var(--ivory) 100%);
+}
+
+.hero-inner {
+  padding-block: clamp(5.5rem, 14vh, 10rem) clamp(5rem, 12vh, 8.5rem);
+  max-width: 54rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.75rem;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
+  color: var(--charcoal-soft);
+  max-width: 34ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero-copy {
+  color: var(--stone);
+  font-size: 0.98rem;
+  max-width: 40rem;
+  margin-bottom: 2.75rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+  opacity: 0.6;
+}
+
+/* ---------- Market strip ---------- */
+
+.markets {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.market-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: clamp(1.25rem, 3.5vw, 3rem);
+  row-gap: 0.6rem;
+  padding-block: 1.6rem;
+}
+
+.market-strip li {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--charcoal-soft);
+  white-space: nowrap;
+  position: relative;
+}
+
+.market-strip li + li::before {
+  content: "";
+  position: absolute;
+  left: calc(-0.5 * clamp(1.25rem, 3.5vw, 3rem));
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: var(--gold-soft);
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding-block: clamp(4.5rem, 10vh, 7.5rem);
+}
+
+.section-tinted {
+  background-color: var(--ivory-deep);
+}
+
+.section-heading {
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+
+/* ---------- Strategy cards ---------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: 2.1rem 1.9rem;
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.card:hover {
+  border-color: var(--gold-soft);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -24px rgba(35, 33, 29, 0.25);
+}
+
+.card h3 {
+  margin-bottom: 0.8rem;
+}
+
+.card h3::after {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background-color: var(--gold-soft);
+  margin-top: 0.8rem;
+  transition: width 0.4s var(--ease);
+}
+
+.card:hover h3::after {
+  width: 3.25rem;
+}
+
+.card p {
+  font-size: 0.92rem;
+  color: var(--charcoal-soft);
+}
+
+/* ---------- Approach ---------- */
+
+.approach-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.approach-text h2 {
+  margin-bottom: 1.5rem;
+}
+
+.approach-text p {
+  color: var(--charcoal-soft);
+  margin-bottom: 1.25rem;
+  max-width: 38rem;
+}
+
+.approach-list {
+  border-top: 1px solid var(--hairline);
+  margin-top: 0.5rem;
+}
+
+.approach-list li {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+}
+
+.approach-list li::before {
+  content: "";
+  flex: none;
+  width: 0.55rem;
+  height: 1px;
+  background-color: var(--gold);
+  transform: translateY(-0.3em);
+}
+
+/* ---------- Process ---------- */
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 2.25rem 1.75rem;
+  counter-reset: step;
+}
+
+.step {
+  border-top: 1px solid var(--hairline);
+  padding-top: 1.4rem;
+  transition: border-color 0.4s var(--ease);
+}
+
+.step:hover {
+  border-top-color: var(--gold);
+}
+
+.step-number {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.9rem;
+}
+
+.step h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+}
+
+.step p {
+  font-size: 0.88rem;
+  color: var(--charcoal-soft);
+}
+
+/* ---------- Review form ---------- */
+
+.review-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.review-intro h2 {
+  margin-bottom: 1.25rem;
+}
+
+.review-intro p {
+  color: var(--charcoal-soft);
+  max-width: 30rem;
+}
+
+.review-form {
+  background-color: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.field input,
+.field select,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--charcoal);
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--hairline);
+  border-radius: 0;
+  padding: 0.55rem 0.1rem;
+  transition: border-color 0.3s var(--ease);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238a8378' stroke-width='1.25'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.2rem center;
+  padding-right: 1.4rem;
+  cursor: pointer;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--stone);
+  opacity: 0.7;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+}
+
+.btn-submit {
+  width: 100%;
+}
+
+.form-note {
+  font-size: 0.75rem;
+  color: var(--stone);
+  margin-top: 1.1rem;
+  text-align: center;
+}
+
+.form-success {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--charcoal);
+  background-color: var(--gold-wash);
+  border: 1px solid var(--gold-soft);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background-color: var(--charcoal);
+  color: rgba(250, 247, 241, 0.75);
+  padding-block: 3.5rem;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--ivory);
+  margin-bottom: 0.35rem;
+}
+
+.footer-company {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin-bottom: 1rem;
+}
+
+.footer-phone {
+  margin-bottom: 1.1rem;
+}
+
+.footer-phone a {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: rgba(250, 247, 241, 0.85);
+  transition: color 0.3s var(--ease);
+}
+
+.footer-phone a:hover {
+  color: var(--gold-soft);
+}
+
+.footer-licensing li {
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: rgba(250, 247, 241, 0.55);
+}
+
+.footer-legal p {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.footer-eho {
+  letter-spacing: 0.08em;
+  color: rgba(250, 247, 241, 0.55);
+}
+
+/* ---------- Reveal animation ---------- */
+
+/* Hidden-until-reveal applies only when JavaScript is running (html.js),
+   so content is never lost if the script fails to load. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn,
+  .card,
+  .step {
+    transition: none;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .approach-inner,
+  .review-inner,
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--hairline);
+    padding: 0.5rem 1.5rem 1.25rem;
+    display: none;
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .site-nav a {
+    padding-block: 0.85rem;
+    width: 100%;
+  }
+
+  .site-nav .nav-cta {
+    border-bottom: none;
+    padding-bottom: 0.85rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .market-strip {
+    justify-content: flex-start;
+  }
+}
