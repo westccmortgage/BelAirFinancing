@@ -160,6 +160,25 @@ h3 {
   background-color: var(--gold-wash);
 }
 
+.btn-gold {
+  border-color: var(--gold);
+  color: var(--gold);
+  background-color: transparent;
+}
+
+.btn-gold:hover {
+  background-color: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -14px rgba(176, 146, 90, 0.55);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 /* ---------- Header ---------- */
 
 .site-header {
@@ -208,7 +227,7 @@ h3 {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 2.2rem;
+  gap: 1.7rem;
 }
 
 .site-nav a {
@@ -216,6 +235,7 @@ h3 {
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--charcoal-soft);
   transition: color 0.3s var(--ease);
 }
@@ -885,7 +905,7 @@ a.card {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 940px) {
   .nav-toggle {
     display: flex;
   }
@@ -917,7 +937,9 @@ a.card {
     border-bottom: none;
     padding-bottom: 0.85rem;
   }
+}
 
+@media (max-width: 720px) {
   .header-inner {
     padding-block: 0.8rem;
   }
