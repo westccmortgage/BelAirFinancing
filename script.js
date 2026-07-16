@@ -133,4 +133,11 @@
       if (structure) setSelect("f-structure", structure);
     });
   });
+
+  // Cross-page presets: /?amount=...&structure=... (e.g. from the super-jumbo page)
+  if (window.URLSearchParams) {
+    var qs = new URLSearchParams(window.location.search);
+    if (qs.get("amount")) setSelect("f-loan-amount", qs.get("amount"));
+    if (qs.get("structure")) setSelect("f-structure", qs.get("structure"));
+  }
 })();
