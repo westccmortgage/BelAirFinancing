@@ -107,4 +107,30 @@
       successNote.hidden = false;
     }
   }
+
+  /* ---------- CTA presets: set a form field before scrolling to it ---------- */
+
+  function setSelect(id, value) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    for (var i = 0; i < el.options.length; i++) {
+      if (el.options[i].value === value || el.options[i].text === value) {
+        el.selectedIndex = i;
+        return;
+      }
+    }
+  }
+
+  var presetLinks = document.querySelectorAll(
+    "a[data-preset-amount], a[data-preset-structure]"
+  );
+
+  Array.prototype.forEach.call(presetLinks, function (link) {
+    link.addEventListener("click", function () {
+      var amount = link.getAttribute("data-preset-amount");
+      var structure = link.getAttribute("data-preset-structure");
+      if (amount) setSelect("f-loan-amount", amount);
+      if (structure) setSelect("f-structure", structure);
+    });
+  });
 })();
