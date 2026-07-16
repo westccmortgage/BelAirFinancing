@@ -704,17 +704,23 @@ h3 {
 }
 
 .footer-phone {
+  margin-bottom: 0.4rem;
+}
+
+.footer-email {
   margin-bottom: 1.1rem;
 }
 
-.footer-phone a {
+.footer-phone a,
+.footer-email a {
   font-size: 0.85rem;
   letter-spacing: 0.06em;
   color: rgba(250, 247, 241, 0.85);
   transition: color 0.3s var(--ease);
 }
 
-.footer-phone a:hover {
+.footer-phone a:hover,
+.footer-email a:hover {
   color: var(--gold-soft);
 }
 
