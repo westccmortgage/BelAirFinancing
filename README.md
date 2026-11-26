@@ -56,7 +56,7 @@ The page already includes a canonical tag, Open Graph / Twitter metadata, and `F
 ## Before going live
 
 - Verify the licensing numbers in the footer of `index.html` against NMLS Consumer Access and CA DRE records before publishing:
-  - West Coast Capital Mortgage Inc. — NMLS #2817729
+  - West Coast Capital Mortgage — NMLS #2817729
   - CA DRE Corporation License #02440065
   - Anatoliy Kanevsky — NMLS #2775380
   - California Real Estate Broker DRE #01385024

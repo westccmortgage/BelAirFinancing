@@ -101,21 +101,46 @@
 
   var navToggle = document.getElementById("navToggle");
   var siteNav = document.getElementById("siteNav");
+  var rootEl = document.documentElement;
+  var desktopMq = window.matchMedia ? window.matchMedia("(min-width: 941px)") : null;
+
+  function setNav(open) {
+    siteNav.classList.toggle("is-open", open);
+    navToggle.classList.toggle("is-open", open);
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    rootEl.classList.toggle("nav-open", open); // scroll lock lives on <html> only
+  }
+
+  function navIsOpen() { return siteNav.classList.contains("is-open"); }
 
   if (navToggle && siteNav) {
-    navToggle.addEventListener("click", function () {
-      var open = siteNav.classList.toggle("is-open");
-      navToggle.classList.toggle("is-open", open);
-      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
+    navToggle.addEventListener("click", function () { setNav(!navIsOpen()); });
 
     siteNav.addEventListener("click", function (event) {
-      if (event.target.tagName === "A") {
-        siteNav.classList.remove("is-open");
-        navToggle.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
+      if (event.target.closest && event.target.closest("a")) setNav(false);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && navIsOpen()) {
+        setNav(false);
+        navToggle.focus();
       }
     });
+
+    // Tap / click outside the menu and its toggle closes it.
+    document.addEventListener("click", function (event) {
+      if (!navIsOpen()) return;
+      if (siteNav.contains(event.target) || navToggle.contains(event.target)) return;
+      setNav(false);
+    });
+
+    var onDesktop = function () { if (desktopMq && desktopMq.matches && navIsOpen()) setNav(false); };
+    if (desktopMq) {
+      if (desktopMq.addEventListener) desktopMq.addEventListener("change", onDesktop);
+      else if (desktopMq.addListener) desktopMq.addListener(onDesktop);
+    }
+    window.addEventListener("resize", onDesktop);
+    window.addEventListener("pageshow", function () { if (navIsOpen()) setNav(false); });
   }
 
   /* ---------- Gentle reveal on scroll ---------- */
@@ -133,7 +158,7 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" }
     );
 
     revealEls.forEach(function (el) {
@@ -149,50 +174,90 @@
 
   var form = document.getElementById("reviewForm");
   var successNote = document.getElementById("formSuccess");
+  var errorNote = document.getElementById("formError");
+  var SEND_TIMEOUT_MS = 30000;
 
   if (form && successNote) {
     syncAttributionFields(form);
 
+    var sending = false;
+    var currentLeadId = ""; // reused if the visitor presses Send again after a failure
+
+    // The error box holds a lead-in text node and the phone link; only the text changes.
+    function showError(lead, tail) {
+      if (!errorNote) return;
+      var phoneLink = errorNote.querySelector("a");
+      errorNote.textContent = lead + " ";
+      if (phoneLink) errorNote.appendChild(phoneLink);
+      errorNote.appendChild(document.createTextNode(tail));
+      errorNote.hidden = false;
+      errorNote.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
     form.addEventListener("submit", function (event) {
+      if (sending) { event.preventDefault(); return; }
       syncAttributionFields(form);
-      var leadId = uid();
-      pendingLead(leadId);
 
       if (!window.fetch || !window.URLSearchParams) {
-        return; // standard POST; conversion fires only after ?submitted=true returns
+        // No fetch: let the browser do one standard POST. The conversion fires
+        // only after ?submitted=true returns.
+        pendingLead(uid());
+        return;
       }
 
       event.preventDefault();
+      if (!currentLeadId) currentLeadId = uid();
+      var leadId = currentLeadId;
 
       var submitButton = form.querySelector('button[type="submit"]');
       var formData = new FormData(form);
+      var timedOut = false;
+      var controller = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () {
+        timedOut = true;
+        if (controller) controller.abort();
+      }, SEND_TIMEOUT_MS);
 
+      sending = true;
+      if (errorNote) errorNote.hidden = true;
+      successNote.hidden = true;
       submitButton.disabled = true;
-      submitButton.textContent = "Sending…";
+      submitButton.textContent = "Sending\u2026";
 
-      fetch("/", {
+      function finish() {
+        clearTimeout(timer);
+        sending = false;
+        submitButton.textContent = "Request Review";
+        submitButton.disabled = false;
+      }
+
+      var request = {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString()
-      })
+      };
+      if (controller) request.signal = controller.signal;
+
+      fetch("/", request)
         .then(function (response) {
           if (!response.ok) throw new Error("Submission failed");
-          sessionRemove(PENDING_KEY);
+          finish();
+          currentLeadId = "";
           fireLeadConversion(leadId);
           window.dataLayer.push({ event: "baf_lead_submit", lead_event_id: leadId, page_location: window.location.href });
           form.reset();
+          syncAttributionFields(form);
           successNote.hidden = false;
-          submitButton.textContent = "Request Review";
-          submitButton.disabled = false;
           successNote.scrollIntoView({ behavior: "smooth", block: "nearest" });
         })
         .catch(function () {
-          // If the AJAX request cannot complete, keep the same pending lead ID
-          // and submit normally. The returning ?submitted=true page consumes it.
-          submitButton.textContent = "Request Review";
-          submitButton.disabled = false;
-          syncAttributionFields(form);
-          form.submit();
+          // Never resubmit automatically: one press of Send is one POST.
+          finish();
+          if (timedOut) {
+            showError("This is taking longer than expected, and your request may already have arrived. Please call", " to check before sending again.");
+          } else {
+            showError("We could not send your request. Please press Request Review again, or call", ".");
+          }
         });
     });
 
@@ -237,4 +302,40 @@
     if (qs.get("amount")) setSelect("f-loan-amount", qs.get("amount"));
     if (qs.get("structure")) setSelect("f-structure", qs.get("structure"));
   }
+  /* ---------- Anchors: land exactly on the target, no smooth scroll on load ---------- */
+
+  (function anchorOnLoad() {
+    var hash = window.location.hash;
+    if (!hash || hash.length < 2) return;
+    var id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch (_) { id = hash.slice(1); }
+    var target = document.getElementById(id);
+    if (!target) return;
+
+    var userMoved = false;
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (name) {
+      window.addEventListener(name, function () { userMoved = true; }, { passive: true, once: true });
+    });
+
+    // Reveal the target and anything inside it so it never waits on the observer.
+    function revealTarget() {
+      if (target.classList.contains("reveal")) target.classList.add("is-visible");
+      Array.prototype.forEach.call(target.querySelectorAll(".reveal"), function (el) {
+        el.classList.add("is-visible");
+      });
+    }
+
+    function jump() {
+      if (userMoved) return;
+      revealTarget();
+      rootEl.style.scrollBehavior = "auto";
+      target.scrollIntoView({ block: "start", behavior: "auto" });
+      window.requestAnimationFrame(function () { rootEl.style.scrollBehavior = ""; });
+    }
+
+    jump();
+    window.addEventListener("load", jump);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
+    setTimeout(jump, 400);
+  })();
 })();

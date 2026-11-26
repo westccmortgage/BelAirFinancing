@@ -21,7 +21,7 @@
     "name": "Bel Air Financing",
     "url": "https://belairfinancing.com/",
     "telephone": "+1-310-654-1577",
-    "email": "contact@beforejumboloan.com",
+    "email": "westccmortgage@gmail.com",
     "description": "Mortgage strategy for high-value homes and complex borrowers across Los Angeles estate markets.",
     "address": {
       "@type": "PostalAddress",
@@ -42,7 +42,7 @@
     ],
     "parentOrganization": {
       "@type": "Organization",
-      "name": "West Coast Capital Mortgage Inc.",
+      "name": "West Coast Capital Mortgage",
       "identifier": "NMLS #2817729"
     },
     "areaServed": [
@@ -59,7 +59,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261125">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f1'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23b0925a'%3EB%3C/text%3E%3C/svg%3E">
   <script>document.documentElement.classList.add("js");</script>
 </head>
@@ -78,7 +78,7 @@
         <a href="#process">Process</a>
         <a href="#areas">Areas</a>
         <a href="#guides">Guides</a>
-        <a href="https://wcci.online" target="_blank" rel="noopener">Review Scenario</a>
+        <a href="https://wcci.online" target="_blank" rel="noopener">AI Scenario Tool &#8599;</a>
         <a href="#review" class="nav-cta">Request a Review</a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -98,7 +98,7 @@
         <p class="hero-copy reveal">For buyers, investors, business owners, and families purchasing or refinancing in Bel Air, Beverly Hills, Holmby Hills, Brentwood, Pacific Palisades, Malibu, Manhattan Beach, and surrounding luxury markets.</p>
         <div class="hero-actions reveal">
           <a href="#review" class="btn btn-primary">Request a Financing Review</a>
-          <a href="https://wcci.online" class="btn btn-gold" target="_blank" rel="noopener">Review My Scenario</a>
+          <a href="https://wcci.online" class="btn btn-gold" target="_blank" rel="noopener">Try the AI Scenario Tool &#8599;</a>
         </div>
       </div>
       <svg class="hero-hills" viewBox="0 0 1440 110" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
@@ -121,7 +121,7 @@
             <h2>Super-Jumbo Financing Access Up to $10M</h2>
             <p>High-value Los Angeles real estate often requires more than a standard jumbo mortgage. For qualified borrowers, we can review select super-jumbo, portfolio, and Non-QM lending paths with loan amounts up to $10 million.</p>
             <p class="superjumbo-support">Available scenarios may include full-documentation borrowers, business owners, self-employed clients, asset-based profiles, bank statement income, interest-only structures, investor loans, and complex high-value purchase or refinance scenarios.</p>
-            <a href="#review" class="btn btn-primary" data-preset-amount="$3M&#8211;$5M">Review a $3M&ndash;$10M Scenario</a>
+            <a href="#review" class="btn btn-primary">Review a $3M&ndash;$10M Scenario</a>
             <a href="/super-jumbo/" class="text-link">More on super-jumbo financing &rarr;</a>
           </div>
         </div>
@@ -337,18 +337,19 @@
           <p class="hp-field" aria-hidden="true">
             <label>Leave this field empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
           </p>
+          <p class="form-required-note"><span class="req" aria-hidden="true">*</span> Required. Phone is optional.</p>
           <div class="form-grid">
             <div class="field">
-              <label for="f-name">Name</label>
-              <input type="text" id="f-name" name="name" autocomplete="name" required>
+              <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-name" name="name" autocomplete="name" required aria-required="true">
             </div>
             <div class="field">
-              <label for="f-email">Email</label>
-              <input type="email" id="f-email" name="email" autocomplete="email" required>
+              <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="f-email" name="email" autocomplete="email" required aria-required="true">
             </div>
             <div class="field">
               <label for="f-phone">Phone</label>
-              <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+              <input type="tel" id="f-phone" name="phone" inputmode="tel" autocomplete="tel" pattern="\+[^0-9]*([0-9][^0-9]*){10,15}|[^0-9+]*(1[^0-9]*)?([0-9][^0-9]*){10}" title="US number with 10 digits, or an international number starting with +" placeholder="(000) 000-0000">
             </div>
             <div class="field">
               <label for="f-area">Target Property Area</label>
@@ -366,8 +367,8 @@
               </select>
             </div>
             <div class="field">
-              <label for="f-price">Estimated Purchase Price or Property Value</label>
-              <input type="text" id="f-price" name="estimated-value" inputmode="numeric" placeholder="e.g. $4,500,000">
+              <label for="f-price">Estimated Purchase Price or Property Value (USD)</label>
+              <input type="text" id="f-price" name="estimated-value" inputmode="numeric" placeholder="4500000">
             </div>
             <div class="field">
               <label for="f-purpose">Loan Purpose</label>
@@ -438,6 +439,8 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary btn-submit">Request Review</button>
+          <p class="form-consent">By sending, you agree we may contact you about your request. <a href="/privacy/">Privacy Policy</a></p>
+          <p class="form-error" id="formError" role="alert" hidden>We could not send your request. Please press Request Review again, or call <a href="tel:+13106541577">(310) 654-1577</a>.</p>
           <p class="form-note">Submitting this form does not constitute a loan application. Your information is used only to arrange your review.</p>
           <p class="form-success" id="formSuccess" hidden>Thank you. Your request has been received — we will be in touch shortly to arrange your review.</p>
         </form>
@@ -458,12 +461,13 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <p class="footer-name">Bel Air Financing</p>
-        <p class="footer-company">West Coast Capital Mortgage Inc.</p>
+        <p class="footer-company">West Coast Capital Mortgage</p>
         <address class="footer-address">150 E Olive Ave, Unit 112<br>Burbank, CA 91502</address>
         <p class="footer-phone"><a href="tel:+13106541577">(310) 654-1577</a></p>
-        <p class="footer-email"><a href="mailto:contact@beforejumboloan.com">contact@beforejumboloan.com</a></p>
+        <p class="footer-email"><a href="mailto:westccmortgage@gmail.com">westccmortgage@gmail.com</a></p>
+        <p class="footer-links"><a href="/privacy/">Privacy</a><span aria-hidden="true"> &middot; </span><a href="/terms/">Terms</a></p>
         <ul class="footer-licensing">
-          <li>West Coast Capital Mortgage Inc. — NMLS #2817729</li>
+          <li>West Coast Capital Mortgage — NMLS #2817729</li>
           <li>CA DRE Corporation License #02440065</li>
           <li>Anatoliy Kanevsky — NMLS #2775380</li>
           <li>California Real Estate Broker DRE #01385024</li>
@@ -476,6 +480,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20261125"></script>
 </body>
 </html>

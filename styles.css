@@ -37,6 +37,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Sticky header is ~67px tall; keep anchored sections clear of it. */
+section[id],
+[id="review"],
+main[id] {
+  scroll-margin-top: 76px;
+}
+
+/* Mobile menu open: lock page scroll on <html> only (body overflow would break sticky). */
+html.nav-open {
+  overflow: hidden;
+}
+
 body {
   font-family: var(--font-body);
   font-weight: 300;
@@ -91,7 +103,7 @@ h3 {
 }
 
 .section-eyebrow {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -217,7 +229,7 @@ h3 {
 }
 
 .brand-sub {
-  font-size: 0.62rem;
+  font-size: 0.6875rem;
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -302,7 +314,7 @@ h3 {
   display: flex;
   align-items: center;
   gap: 0.9rem;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -480,6 +492,14 @@ h3 {
   max-width: 38rem;
 }
 
+.approach-list-lead {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--charcoal);
+  margin-bottom: 0.75rem;
+}
+
 .approach-list {
   border-top: 1px solid var(--hairline);
   margin-top: 0.5rem;
@@ -585,7 +605,7 @@ h3 {
 }
 
 .field label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -637,6 +657,47 @@ h3 {
 
 .btn-submit {
   width: 100%;
+}
+
+.req {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.form-required-note {
+  font-size: 0.8rem;
+  color: var(--stone);
+  margin-bottom: 1rem;
+}
+
+.form-consent {
+  font-size: 0.8rem;
+  color: var(--charcoal-soft);
+  margin-top: 1.1rem;
+  text-align: center;
+}
+
+.form-consent a,
+.form-error a,
+.legal a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form-error {
+  margin-top: 1rem;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.9rem;
+  color: #7a2b1d;
+  background-color: rgba(122, 43, 29, 0.07);
+  border: 1px solid rgba(122, 43, 29, 0.35);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.form-error[hidden],
+.form-success[hidden] {
+  display: none;
 }
 
 .form-note {
@@ -703,16 +764,23 @@ h3 {
   margin-bottom: 0.75rem;
 }
 
-.footer-phone {
-  margin-bottom: 0.4rem;
+.footer-phone,
+.footer-email,
+.footer-links {
+  margin-bottom: 0;
 }
 
-.footer-email {
-  margin-bottom: 1.1rem;
+.footer-links {
+  margin-bottom: 1rem;
+  color: rgba(250, 247, 241, 0.55);
 }
 
 .footer-phone a,
-.footer-email a {
+.footer-email a,
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
   font-size: 0.85rem;
   letter-spacing: 0.06em;
   color: rgba(250, 247, 241, 0.85);
@@ -720,7 +788,8 @@ h3 {
 }
 
 .footer-phone a:hover,
-.footer-email a:hover {
+.footer-email a:hover,
+.footer-links a:hover {
   color: var(--gold-soft);
 }
 
@@ -780,14 +849,20 @@ a.card {
 /* ---------- Breadcrumb ---------- */
 
 .breadcrumb {
-  font-size: 0.72rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--stone);
-  margin-bottom: 1.4rem;
+  margin-bottom: 0.9rem;
 }
 
 .breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
   color: var(--stone);
   transition: color 0.3s var(--ease);
 }
@@ -823,7 +898,7 @@ a.card {
 
 .superjumbo-amount-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -1002,6 +1077,12 @@ a.card {
   transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 
+.js .hero .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .js .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -1028,6 +1109,17 @@ a.card {
 /* ---------- Responsive ---------- */
 
 @media (max-width: 900px) {
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  .field textarea {
+    min-height: 6rem;
+  }
+
   .approach-inner,
   .review-inner,
   .footer-inner,
@@ -1050,6 +1142,9 @@ a.card {
   }
 
   .site-nav {
+    max-height: calc(100dvh - 67px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     position: absolute;
     top: 100%;
     left: 0;
@@ -1088,8 +1183,8 @@ a.card {
   }
 
   .brand-sub {
-    font-size: 0.54rem;
-    letter-spacing: 0.18em;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
   }
 
   .hero-inner {
@@ -1134,4 +1229,26 @@ a.card {
   .market-strip {
     justify-content: flex-start;
   }
+}
+
+/* ---------- Legal pages (privacy, terms) ---------- */
+
+.legal {
+  padding-block: clamp(3rem, 8vh, 5rem);
+}
+
+.legal .prose {
+  max-width: 44rem;
+  overflow-wrap: anywhere;
+}
+
+.legal h1 {
+  font-size: clamp(2.2rem, 6vw, 3.25rem);
+  margin-bottom: 0.6rem;
+}
+
+.legal .legal-updated {
+  font-size: 0.85rem;
+  color: var(--stone);
+  margin-bottom: 2rem;
 }
